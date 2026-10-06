@@ -225,10 +225,70 @@ details{background:var(--bg);border:1px solid var(--line);border-radius:.8rem;pa
 .rc{display:flex;flex-direction:column}.rc .btn{margin-top:.9rem}.rc h3{margin-top:.6rem}
 @media print{.nav,.alertbar,.hero,.ribbon,section:not(#edt),footer,.bar-row,.lb{display:none!important}#edt{padding:0}.tt td.now{outline:0}}
 </style>
+<style>
+/* ===== البحث عن قسم التلميذ ===== */
+.finder{background:var(--surface);border:1px solid var(--line);border-radius:1.2rem;padding:clamp(1.1rem,3vw,2rem);margin-top:1.6rem;max-width:44rem}
+.finder form{display:grid;grid-template-columns:1fr 1fr auto;gap:.8rem;align-items:end}
+.finder label{display:grid;gap:.3rem;font-weight:600;font-size:.92rem;min-width:0}
+.finder input{font:400 1rem var(--f-body);padding:.75rem .9rem;border-radius:.8rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%;min-height:3rem}
+.finder button{min-height:3rem;justify-content:center}
+.finder .note{color:var(--muted);font-size:.85rem;margin-top:.9rem}
+#fres{margin-top:1.2rem;display:grid;gap:.8rem}
+.fr{display:flex;align-items:center;gap:1rem;border:1px solid var(--line);border-inline-start:6px solid var(--teal);border-radius:1rem;padding:.9rem 1.1rem;background:var(--bg)}
+.fr .who{flex:1;min-width:0}.fr .who b{display:block;font:700 1.15rem var(--f-display)}.fr .who span{color:var(--muted);font-size:.9rem}
+.fr .cl2{text-align:center;flex:none}.fr .cl2 strong{display:block;font:700 1.9rem/1 var(--f-display);color:var(--blue);direction:ltr;unicode-bidi:isolate}.fr .cl2 small{color:var(--muted);font-size:.78rem}
+.fmsg{padding:.9rem 1.1rem;border-radius:1rem;background:var(--bg);border:1px dashed var(--line);color:var(--muted)}
+.fmsg.warn{border-color:var(--sun);color:var(--ink)}
+
+/* ===== تحسينات الهاتف ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (max-width:900px){
+  section{padding-block:clamp(2.2rem,7vw,3.5rem)}
+  .hero{padding-block:1.8rem 2.2rem}
+  .hero h1{font-size:clamp(2.8rem,15vw,4.2rem)}
+  .arch{width:min(78%,17rem)}
+  .arch .stamp{inset-inline-start:-.4rem;bottom:1.2rem;font-size:.82rem}
+  .cg{gap:2px}.d{min-height:3.1rem;padding:.2rem;font-size:.72rem}
+  .tw,.ttw{-webkit-overflow-scrolling:touch}
+}
+@media (max-width:700px){
+  .finder form{grid-template-columns:1fr}
+  .nav .wrap{gap:.5rem;min-height:3.4rem}
+  .links{margin-inline-start:0;flex:1;min-width:0;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+    -webkit-mask:linear-gradient(to left,#000 88%,transparent);mask:linear-gradient(to left,#000 88%,transparent);padding-inline-end:1rem}
+  .links a{padding:.6rem .85rem;min-height:2.75rem;display:inline-flex;align-items:center;scroll-snap-align:start}
+  .tbtn{width:2.75rem;height:2.75rem}
+  .cta{gap:.6rem;margin-top:1.4rem}
+  .cta .btn{padding:.65rem 1rem;font-size:.92rem;flex:1 1 calc(50% - .6rem);justify-content:center;text-align:center}
+  .hero .facts{gap:.4rem}.chip{font-size:.82rem;padding:.25rem .7rem}
+  .cl{grid-template-columns:1fr}
+  .box,.panel,.finder{border-radius:1rem}
+  .an{padding:.95rem 1rem}.an .btn.o{width:100%;justify-content:center;text-align:center}
+  .btn.o{padding:.6rem 1rem}
+  .bar-row{gap:.6rem}.lvf{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;max-width:100%;padding-bottom:.2rem}
+  .lvf button,.filters button{white-space:nowrap;min-height:2.6rem}
+  .filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*max(1rem,4vw));padding-inline:max(1rem,4vw)}
+  .masonry{columns:2 9rem;column-gap:.6rem}.tile{margin-bottom:.6rem;border-radius:.8rem}
+  .tile figcaption{font-size:.76rem;padding:1.4rem .6rem .5rem}
+  .stat{padding:1rem .8rem}.stat b{font-size:2.1rem}.stat span{font-size:.85rem}
+  .dl{grid-template-columns:1fr;gap:.2rem}.dl dd{margin-bottom:.7rem}
+  .contact img{width:min(70%,18rem)!important}
+  .frm input,.frm select,.frm textarea,.sel,.srch,.finder input{font-size:16px}
+  .sel,.srch{min-height:2.75rem}
+  .lb{padding:4rem .5rem .5rem}.lb button{width:2.75rem;height:2.75rem}
+  .lb .nx,.lb .pv{top:auto;bottom:1rem}
+  footer .wrap{flex-direction:column;align-items:flex-start}footer .fl img{height:3.4rem}
+  .hl th,.hl td{padding:.6rem .6rem;font-size:.88rem}
+  .ev{flex-wrap:wrap;gap:.3rem .8rem}
+}
+@media (max-width:380px){.masonry{columns:1}.brand img{width:2.2rem;height:2.2rem}}
+@media (hover:none){.tile:hover img{transform:none}}
+</style>
+
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top"><img src="img/logo.png" alt="شعار مدرسة السلام" width="40" height="40"><span>مدرسة السلام</span></a>
-    <nav class="links" aria-label="التنقل"><a href="#news">الإعلانات</a><a href="#agenda">التقويم</a><a href="#edt">استعمالات الزمن</a><a href="#remote">الدعم عن بعد</a><a href="#holidays">العطل</a><a href="#clubs">النوادي</a><a href="#life">المعرض</a><a href="#numbers">المدرسة بالأرقام</a><a href="#talk">تواصل مع الإدارة</a></nav>
+    <nav class="links" aria-label="التنقل"><a href="#classe">قسم التلميذ</a><a href="#news">الإعلانات</a><a href="#agenda">التقويم</a><a href="#edt">استعمالات الزمن</a><a href="#remote">الدعم عن بعد</a><a href="#holidays">العطل</a><a href="#clubs">النوادي</a><a href="#life">المعرض</a><a href="#numbers">المدرسة بالأرقام</a><a href="#talk">تواصل مع الإدارة</a></nav>
     <button class="tbtn" id="theme" type="button" aria-label="تبديل المظهر">◐</button>
   </div>
 </header>
@@ -243,7 +303,7 @@ details{background:var(--bg);border:1px solid var(--line);border-radius:.8rem;pa
       <h1>مدرسة <span>السلام</span></h1>
       <p class="tag">من أجل مدرسة عمومية ذات جودة للجميع</p>
       <div class="facts"><span class="chip">منذ 2012</span><span class="chip"><span class="num">1320</span> متعلمة ومتعلم</span><span class="chip">مشروع مؤسسة الريادة</span></div>
-      <div class="cta"><a class="btn fill" href="#news">آخر الإعلانات</a><a class="btn ghost" href="#agenda">تقويم الفروض</a><a class="btn ghost" href="#edt">استعمالات الزمن</a><a class="btn ghost" href="#remote">الدعم عن بعد</a></div>
+      <div class="cta"><a class="btn fill" href="#classe">قسم تلميذي</a><a class="btn ghost" href="#news">آخر الإعلانات</a><a class="btn ghost" href="#agenda">تقويم الفروض</a><a class="btn ghost" href="#edt">استعمالات الزمن</a><a class="btn ghost" href="#remote">الدعم عن بعد</a></div>
     </div>
     <div class="arch">
       <img src="img/p39.jpg" alt="تلميذات وتلاميذ بأزياء مغربية تقليدية أمام جدار المدرسة الأزرق">
@@ -254,6 +314,23 @@ details{background:var(--bg);border:1px solid var(--line);border-radius:.8rem;pa
 
 <div class="ribbon" aria-hidden="true"><div><span>القراءة</span><span>الحساب</span><span>المسرح</span><span>الخطابة</span><span>أولمبياد الرياضيات</span><span>الإملاء</span><span>الحافظ الصغير</span><span>السلامة الطرقية</span><span>كرة القدم</span><span>الإسعافات الأولية</span><span>مدرستي بيتي الثاني</span><span>القراءة</span><span>الحساب</span><span>المسرح</span><span>الخطابة</span><span>أولمبياد الرياضيات</span><span>الإملاء</span><span>الحافظ الصغير</span><span>السلامة الطرقية</span><span>كرة القدم</span><span>الإسعافات الأولية</span><span>مدرستي بيتي الثاني</span></div></div>
 
+
+<section id="classe" class="zl">
+  <div class="wrap">
+    <p class="eyebrow">خدمة للأسر</p>
+    <h2>اعرف قسم تلميذك</h2>
+    <p class="lead">اكتب النسب والاسم الشخصي للتلميذ(ة) كما هو في الحالة المدنية، وسيظهر لك القسم مباشرة.</p>
+    <div class="finder">
+      <form id="ff" autocomplete="off" novalidate>
+        <label>النسب<input id="fn" name="fn" type="text" inputmode="text" enterkeyhint="next" autocomplete="off" required placeholder="مثال: العلوي"></label>
+        <label>الاسم الشخصي<input id="fp" name="fp" type="text" inputmode="text" enterkeyhint="search" autocomplete="off" required placeholder="مثال: ياسمين"></label>
+        <button class="btn fill" type="submit">ابحث</button>
+      </form>
+      <div id="fres" aria-live="polite"></div>
+      <p class="note">يجب إدخال النسب والاسم معًا. إذا لم تجد النتيجة فجرّب عكس ترتيب الكلمتين أو تواصل مع الإدارة.</p>
+    </div>
+  </div>
+</section>
 
 <section id="news" class="alt"><div class="wrap">
   <p class="eyebrow">فضاء الإخبار والتنبيهات</p><h2>إعلانات المؤسسة</h2>
@@ -422,7 +499,7 @@ details{background:var(--bg);border:1px solid var(--line);border-radius:.8rem;pa
           <dt>الأكاديمية</dt><dd>مراكش – آسفي</dd>
           <dt>رمز المؤسسة</dt><dd class="num">25761A</dd>
         </dl>
-        <div class="cta"><a class="btn fill" href="https://maps.app.goo.gl/tFwn1J4Wv7Q4T4by5" target="_blank" rel="noopener" style="color:var(--on-sun)">افتح الموقع على الخرائط</a><button class="btn o" id="copy" type="button" style="color:var(--on-sun)">نسخ العنوان</button></div>
+        <div class="cta"><a class="btn fill" href="https://maps.app.goo.gl/tFwn1J4Wv7Q4T4by5" target="_blank" rel="noopener" style="color:var(--on-sun)">افتح الموقع على الخرائط</a><button class="btn o" id="copy" type="button" style="color:var(--on-sun)">نسخ العنوان</button><a class="btn o" id="chan" hidden target="_blank" rel="noopener" style="color:var(--on-sun)">قناة المدرسة على WhatsApp</a></div>
       </div>
     </div>
   </div>
@@ -465,6 +542,7 @@ details{background:var(--bg);border:1px solid var(--line);border-radius:.8rem;pa
   var D=window.SALAM,q=function(s){return document.querySelector(s)},esc=function(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   if(!D){var b=q('#alertbar');b.hidden=false;b.firstElementChild.innerHTML='<b>تنبيه للمحرّر:</b> ملف data.js فيه خطأ (غالبًا فاصلة ناقصة أو علامة اقتباس). افتح الصفحة بالرابط ‎index.html?check لمعرفة التفاصيل.';window.SALAM={contact:{},announcements:[],events:[],holidays:[],faq:[],timetable:{days:[],classes:[],times:{std:{},l1:{}},subj:{},per:{}},remote:{types:{},items:[]},clubs:[],clubReg:{}};D=window.SALAM}
   D.contact=D.contact||{};
+  if(D.contact.channel){var ch=q('#chan');if(ch){ch.href=D.contact.channel;ch.hidden=false}}
 
   /* الواجهة */
   var S=D.site||{};
@@ -610,7 +688,7 @@ function ref(p){return p+'-'+Math.random().toString(36).slice(2,6).toUpperCase()
 var A=D.announcements.filter(function(a){return !a.expires||df(a.expires)>=0}).sort(function(a,b){return (b.urgent?1:0)-(a.urgent?1:0)||pd(b.date)-pd(a.date)});
 $('#ann').innerHTML=A.length?A.map(function(a){
   var t=a.title+'\n'+a.body+'\n— مدرسة السلام، آيت أورير';
-  return '<article class="an'+(a.urgent?' u':'')+'"><h3>'+esc(a.title)+'</h3><div class="meta">'+(a.urgent?'<span class="pill r">مستعجل</span>':'')+(a.cat?'<span class="pill">'+esc(a.cat)+'</span>':'')+'<span>نُشر في '+fd(a.date)+'</span>'+(a.expires?'<span>صالح حتى '+fd(a.expires)+'</span>':'')+'</div><p>'+esc(a.body)+'</p><a class="btn o" target="_blank" rel="noopener" href="'+wa(t)+'">انضموا إلينا لتكونوا على اطلاع دائم بكل ما يخص مدرستنا، عبر WhatsApp</a></article>'}).join(''):'<p class="lead">لا توجد إعلانات حاليًا.</p>';
+  return '<article class="an'+(a.urgent?' u':'')+'"><h3>'+esc(a.title)+'</h3><div class="meta">'+(a.urgent?'<span class="pill r">مستعجل</span>':'')+(a.cat?'<span class="pill">'+esc(a.cat)+'</span>':'')+'<span>نُشر في '+fd(a.date)+'</span>'+(a.expires?'<span>صالح حتى '+fd(a.expires)+'</span>':'')+'</div><p>'+esc(a.body)+'</p><a class="btn o" target="_blank" rel="noopener" href="'+esc(D.contact.channel||wa(t))+'">انضموا إلى قناة المدرسة على WhatsApp لتكونوا على اطلاع دائم بكل ما يخص مدرستنا</a></article>'}).join(''):'<p class="lead">لا توجد إعلانات حاليًا.</p>';
 var U=A.filter(function(a){return a.urgent})[0];
 if(U){var b=$('#alertbar');b.hidden=false;b.firstElementChild.innerHTML='<b>مستعجل:</b> <a href="#news">'+esc(U.title)+'</a>'}
 
@@ -704,6 +782,70 @@ $('#rs').onchange=function(){rsu=this.value;rr()};$('#rq').oninput=function(){rq
 chips('#rl',LV.map(function(l,i){return [i,l]}),0,function(v){rl=+v;rr()});
 chips('#rt',[['','كل الأنواع']].concat(Object.keys(RM.types).map(function(k){return [k,RM.types[k]]})),'',function(v){rty=v;rr()});
 rr();
+})();
+</script>
+<script>
+/* البحث عن قسم التلميذ: يُحمَّل ملف students.js عند أول استعمال فقط */
+(function(){
+  var f=document.getElementById('ff'),out=document.getElementById('fres'),loaded=false,loading=null;
+  if(!f)return;
+  function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  /* توحيد الكتابة: حذف التشكيل والتطويل، توحيد الألف والياء والتاء المربوطة، وحذف المسافات الزائدة */
+  function norm(t){
+    return String(t||'').toLowerCase()
+      .replace(/[\u064B-\u065F\u0670\u0640]/g,'')
+      .replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ئ/g,'ي').replace(/ؤ/g,'و').replace(/ة/g,'ه')
+      .replace(/[^\u0621-\u064Aa-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+  }
+  function toks(t){var a=norm(t);return a?a.split(' '):[]}
+  function strip(w){return w.length>3&&w.indexOf('ال')===0?w.slice(2):w}
+  function same(a,b){return a===b||strip(a)===strip(b)}
+  function load(cb){
+    if(loaded)return cb();
+    if(loading)return loading.push(cb);
+    loading=[cb];
+    var s=document.createElement('script');s.src='students.js';
+    s.onload=function(){
+      var L=window.SALAM_ELEVES||[];
+      window.__idx=L.map(function(r){return {n:toks(r[0]),p:toks(r[1]),c:r[2],raw:r}});
+      loaded=true;var q=loading;loading=null;q.forEach(function(x){x()})};
+    s.onerror=function(){var q=loading;loading=null;loaded=false;out.innerHTML='<div class="fmsg warn">تعذّر تحميل لائحة التلاميذ. تحقق من الاتصال ثم أعد المحاولة.</div>'};
+    document.head.appendChild(s);
+  }
+  /* كل كلمة يكتبها المستعمل تستهلك كلمة مختلفة من السجل (بأي ترتيب، لأن بعض السجلات قد تكون معكوسة) */
+  function match(row,qn,qp){
+    var pool=row.n.concat(row.p),q=qn.concat(qp);
+    if(q.length>pool.length)return false;
+    for(var i=0;i<q.length;i++){
+      var k=-1;
+      for(var j=0;j<pool.length;j++){if(same(q[i],pool[j])){k=j;break}}
+      if(k<0)return false;pool.splice(k,1);
+    }
+    return pool.length===0;
+  }
+  function label(code){
+    var C=window.SALAM_CLASSES||{},m=/^(\d)APG-(\d+)$/.exec(code);
+    return {lv:C[code]||'',num:m?m[2]:code.replace(/^.*-/,'')};
+  }
+  function show(list){
+    out.innerHTML=list.map(function(r){
+      var L=label(r.c);
+      return '<div class="fr"><div class="who"><b>'+esc(r.raw[0]+' '+r.raw[1])+'</b><span>'+esc(L.lv)+'</span></div><div class="cl2"><small>القسم</small><strong>'+esc(r.c)+'</strong></div></div>'}).join('');
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var qn=toks(f.fn.value),qp=toks(f.fp.value);
+    if(!qn.length||!qp.length){out.innerHTML='<div class="fmsg warn">من فضلك اكتب النسب والاسم الشخصي معًا.</div>';return}
+    out.innerHTML='<div class="fmsg">جارٍ البحث…</div>';
+    load(function(){
+      var r=window.__idx.filter(function(x){return match(x,qn,qp)});
+      if(!r.length)out.innerHTML='<div class="fmsg warn">لم نعثر على تلميذ بهذا الاسم. تأكد من الكتابة (جرّب بدون «ال» أو بترتيب آخر)، أو تواصل مع إدارة المدرسة.</div>';
+      else if(r.length>5)out.innerHTML='<div class="fmsg warn">النتائج كثيرة، من فضلك اكتب الاسم الكامل بدقة.</div>';
+      else{show(r);if(r.length>1)out.insertAdjacentHTML('afterbegin','<div class="fmsg">وُجد أكثر من تلميذ بهذا الاسم، تأكد من الاسم الصحيح.</div>')}
+    });
+  });
+  /* تحميل مسبق خفيف عند أول تركيز على الحقول */
+  [f.fn,f.fp].forEach(function(i){i.addEventListener('focus',function(){load(function(){})},{once:true})});
 })();
 </script>
 </body></html>
