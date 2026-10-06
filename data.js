@@ -164,9 +164,9 @@ window.SALAM={
   remote:{
     types:{lesson:"درس",sheet:"تمارين",summary:"ملخص",video:"فيديو",doc:"وثيقة"},
     items:[
-      {title:"درس في القراءة: الحروف والمقاطع",level:1,subject:"اللغة العربية",type:"lesson",file:"",date:"2026-10-03",desc:"مثال: أضيفوا وصفًا قصيرًا للدرس.",demo:true},
-      {title:"سلسلة تمارين في الجمع والطرح",level:[2,3],subject:"الرياضيات",type:"sheet",file:"",date:"2026-10-02",demo:true},
-      {title:"ملخص درس الأفعال المضارعة",level:[4,5,6],subject:"اللغة العربية",type:"summary",file:"",date:"2026-10-01",demo:true}
+      {title:" ",level:1,subject:"اللغة العربية",type:"lesson",file:"",date:"2026-10-03",desc:" ",demo:false},
+      {title:" ",level:[2,3],subject:"الرياضيات",type:"sheet",file:"",date:"2026-10-02",demo:false},
+      {title:" ",level:[4,5,6],subject:"اللغة العربية",type:"summary",file:"",date:"2026-10-01",demo:false}
     ]
   },
   clubs:[
