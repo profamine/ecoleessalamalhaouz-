@@ -382,7 +382,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 <section id="holidays" class="alt"><div class="wrap">
   <p class="eyebrow">العطل والمناسبات</p><h2>لائحة العطل المدرسية</h2>
   <div class="two2"><div><p class="lead" style="margin-top:0">العطلة المقبلة</p><div class="cnt" id="hc"></div><p id="hn" style="font-weight:600;margin-top:.4rem"></p></div>
-  <p class="lead" style="margin-top:0">العطل وفق مقرر تنظيم السنة الدراسية 2026-2027 الصادر عن الوزارة. تظهر أيامها بلون مميز في التقويم.</p></div>
+  <p class="lead" style="margin-top:0">العطل وفق مقرر تنظيم السنة الدراسية 2026-2027 الصادر عن الوزارة. تظهر أيامها بلون مميز في التقويم. وتُحدَّد تواريخ الأعياد الدينية بحسب الإعلان الرسمي لبداية الشهور الهجرية.</p></div>
   <div class="tw"><table class="hl"><thead><tr><th>العطلة</th><th>البداية</th><th>النهاية</th><th>الأيام</th></tr></thead><tbody id="ht"></tbody></table></div>
 </div></section>
 
@@ -591,7 +591,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     function dt(l,v,req){if(v&&!re.test(v))m.push(l+': التاريخ «'+v+'» يجب أن يكون بالشكل 2026-11-20');else if(req&&!v)m.push(l+': التاريخ ناقص')}
     (D.announcements||[]).forEach(function(a,i){dt('إعلان '+(i+1),a.date,1);dt('إعلان '+(i+1)+' (expires)',a.expires);if(!a.title)m.push('إعلان '+(i+1)+': العنوان ناقص')});
     (D.events||[]).forEach(function(e,i){dt('موعد '+(i+1),e.start,1);dt('موعد '+(i+1)+' (end)',e.end);if(['exam','eval','meet','act'].indexOf(e.type)<0)m.push('موعد '+(i+1)+': النوع «'+e.type+'» غير معروف (exam|eval|meet|act)')});
-    (D.holidays||[]).forEach(function(h,i){dt('عطلة '+(i+1),h.start,1);dt('عطلة '+(i+1)+' (end)',h.end)});
+    (D.holidays||[]).forEach(function(h,i){dt('عطلة '+(i+1),h.start,!h.when);dt('عطلة '+(i+1)+' (end)',h.end);dt('عطلة '+(i+1)+' (order)',h.order);if(!h.start&&!h.when)m.push('عطلة '+(i+1)+': أضيفوا start أو when')});
     (D.gallery||[]).forEach(function(g,i){if(!C[g.cat])m.push('صورة '+(i+1)+' ('+g.file+'): التصنيف «'+g.cat+'» غير موجود في galleryCats');var im=new Image();im.onerror=function(){add('الصورة غير موجودة: img/'+g.file)};im.src='img/'+g.file});
     (D.remote&&D.remote.items||[]).forEach(function(r,i){if(r.file&&!/^https?:/.test(r.file)){var x=new XMLHttpRequest();x.open('HEAD',r.file);x.onload=function(){if(x.status>=400)add('الملف غير موجود: '+r.file)};x.send()}});
     function add(t){m.push(t);draw()}
@@ -707,7 +707,7 @@ var U=A.filter(function(a){return a.urgent})[0];
 if(U){var b=$('#alertbar');b.hidden=false;b.firstElementChild.innerHTML='<b>مستعجل:</b> <a href="#news">'+esc(U.title)+'</a>'}
 
 /* events + holidays */
-var H=D.holidays.slice().sort(function(a,b){return pd(a.start)-pd(b.start)});
+var HA=D.holidays.slice().sort(function(a,b){return pd(a.start||a.order||'2099-01-01')-pd(b.start||b.order||'2099-01-01')}),H=HA.filter(function(h){return h.start});
 var E=D.events.map(function(e){return {s:e.start,e:e.end||e.start,t:e.title,k:e.type,l:e.levels}}).concat(H.map(function(h){return {s:h.start,e:h.end||h.start,t:h.title,k:'holiday'}}));
 var lv=0,cy=T.getFullYear(),cm=T.getMonth();
 function ok(e){return !lv||!e.l||e.l.indexOf(lv)>-1}
@@ -741,7 +741,9 @@ $('#ics').onclick=function(){
 var nx=H.filter(function(h){return df(h.end||h.start)>=0})[0];
 if(nx){var n0=df(nx.start);$('#hc').innerHTML=n0>0?'<span class="num">'+n0+'</span> يومًا':'الآن';$('#hn').textContent=(n0>0?'تبقّى على ':'نحن في ')+nx.title+' · '+fd(nx.start)}
 else{$('#hc').textContent='—';$('#hn').textContent='لا عطل مقبلة مسجلة'}
-$('#ht').innerHTML=H.map(function(h){var e=h.end||h.start,n=Math.round((pd(e)-pd(h.start))/864e5)+1;
+$('#ht').innerHTML=HA.map(function(h){
+  if(!h.start){return '<tr'+(h.order&&df(h.order)<0?' class="p"':'')+'><td>'+esc(h.title)+'</td><td colspan="2">'+esc(h.when||'')+'</td><td><span class="num">'+esc(h.days||'—')+'</span></td></tr>'}
+  var e=h.end||h.start,n=Math.round((pd(e)-pd(h.start))/864e5)+1;
   return '<tr'+(df(e)<0?' class="p"':'')+'><td>'+esc(h.title)+'</td><td>'+fd(h.start)+'</td><td>'+fd(e)+'</td><td><span class="num">'+n+'</span></td></tr>'}).join('');
 
 /* clubs */
