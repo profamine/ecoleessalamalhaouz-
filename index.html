@@ -777,7 +777,7 @@ function tt(){
   h='<div class="ttinfo"><b>القسم '+nm(c)+'</b><span>المستوى '+LV[c.level]+'</span></div><div class="ttw"><table class="tt"><thead><tr><th class="tm"></th>'+TT.days.map(function(x,i){return '<th'+(i===gd?' class="today"':'')+'>'+esc(x)+'<small>'+TT.per[c.d[i].charAt(0)]+'</small></th>'}).join('')+'</tr></thead><tbody>';
   X['ص'].forEach(function(s,r){
     if(s.charAt(0)==='*'){h+='<tr><td class="br" colspan="'+(TT.days.length+1)+'">استراحة</td></tr>';return}
-    h+='<tr><th class="tm">ح'+(k+1)+'</th>'+TT.days.map(function(x,i){var z=c.d[i],t=X[z.charAt(0)][r],m=t.match(/(\d+):(\d+)\D+(\d+):(\d+)/),v=TT.subj[z.charAt(k+1)]||'';
+    h+='<tr><th class="tm">ح'+(k+1)+'</th>'+TT.days.map(function(x,i){var z=c.d[i],t=((TT.times.fri&&TT.days[i]==='الجمعة')?TT.times.fri:X)[z.charAt(0)][r],m=t.match(/(\d+):(\d+)\D+(\d+):(\d+)/),v=TT.subj[z.charAt(k+1)]||'';
       return '<td class="s-'+sc(v)+(v&&i===gd&&mn>=+m[1]*60+ +m[2]&&mn<+m[3]*60+ +m[4]?' now':'')+'">'+(v?esc(v):'—')+'<small>'+t+'</small></td>'}).join('')+'</tr>';k++});
   $('#tb').innerHTML=h+'</tbody></table></div>'}
 chips('#tl',[1,2,3,4,5,6].map(function(i){return [i,LV[i]]}),1,function(v){tlv=+v;tci=0;tt()});
@@ -794,8 +794,9 @@ function gt(){
     h+='<tr><th class="nm">'+nm(c)+'</th>'+D6.map(function(x,i){var z=c.d[i];
       return '<td'+(i===gd?' class="today"':'')+'><b class="p">'+esc(z.charAt(0))+'</b>'+z.slice(1).split('').map(function(k){return '<i class="c '+sc(TT.subj[k]||'')+'">'+esc(k)+'</i>'}).join('')+'</td>'}).join('')+'</tr>'});
   h+='</tbody></table></div><div class="gtl">'+Object.keys(TT.subj).map(function(k){return '<span><i class="c '+sc(TT.subj[k])+'">'+esc(k)+'</i> '+esc(TT.subj[k])+'</span>'}).join('')+Object.keys(TT.per).map(function(k){return '<span><b>'+esc(k)+'</b> '+esc(TT.per[k])+'</span>'}).join('')+'</div>'
-  +'<div class="gtl"><span><b>المستويات 2–6 · صباحًا:</b><br>'+ts(TT.times.std['ص'])+'</span><span><b>مساءً:</b><br>'+ts(TT.times.std['م'])+'</span></div>'
-  +'<div class="gtl"><span><b>المستوى الأول · صباحًا:</b><br>'+ts(TT.times.l1['ص'])+'</span><span><b>مساءً:</b><br>'+ts(TT.times.l1['م'])+'</span></div>';
+  +'<div class="gtl"><span><b>'+(JSON.stringify(TT.times.std)===JSON.stringify(TT.times.l1)?'التوقيت العادي · صباحًا:':'المستويات 2–6 · صباحًا:')+'</b><br>'+ts(TT.times.std['ص'])+'</span><span><b>مساءً:</b><br>'+ts(TT.times.std['م'])+'</span></div>'
+  +(JSON.stringify(TT.times.std)===JSON.stringify(TT.times.l1)?'':'<div class="gtl"><span><b>المستوى الأول · صباحًا:</b><br>'+ts(TT.times.l1['ص'])+'</span><span><b>مساءً:</b><br>'+ts(TT.times.l1['م'])+'</span></div>')
+  +(TT.times.fri?'<div class="gtl"><span><b>يوم الجمعة · صباحًا:</b><br>'+ts(TT.times.fri['ص'])+'</span><span><b>مساءً:</b><br>'+ts(TT.times.fri['م'])+'</span></div>':'');
   $('#tg').innerHTML=h;$('#tp2').onclick=function(){print()}}
 function tsw(v){var g=v==='g';$('#tbar').style.display=g?'none':'';$('#tb').style.display=g?'none':'';$('#tg').style.display=g?'':'none';if(g)gt();else tt()}
 chips('#tm',[['c','جدول قسم'],['g','الاستعمال الجماعي']],'c',tsw);
