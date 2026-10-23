@@ -571,8 +571,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   (D.pages||[]).forEach(function(p){
     if(!p.id||document.getElementById(p.id))return;
     var sec=document.createElement('section');sec.id=p.id;sec.className=p.alt?'alt':'zl';
-    sec.innerHTML='<div class="wrap">'+(p.eyebrow?'<p class="eyebrow">'+esc(p.eyebrow)+'</p>':'')+'<h2>'+esc(p.title||p.label)+'</h2>'+(p.text?'<p class="lead">'+esc(p.text)+'</p>':'')+'<div class="cards">'+(p.cards||[]).map(function(c){return '<div class="card"><h3>'+esc(c.title)+'</h3>'+(c.text?'<p>'+esc(c.text)+'</p>':'')+(c.url?'<a class="btn o" target="_blank" rel="noopener" href="'+esc(c.url)+'">'+esc(c.btn||'فتح')+'</a>':'')+'</div>'}).join('')+'</div></div>';
-    var ref=document.getElementById(p.after)||document.getElementById('numbers');ref.parentNode.insertBefore(sec,ref);
+    sec.innerHTML='<div class="wrap">'+(p.eyebrow?'<p class="eyebrow">'+esc(p.eyebrow)+'</p>':'')+'<h2>'+esc(p.title||p.label)+'</h2>'+(p.text?'<p class="lead">'+esc(p.text)+'</p>':'')+'<div class="cards">'+(p.cards||[]).map(function(c){return '<div class="card"'+(c.img?' style="grid-column:1/-1"':'')+'><h3>'+esc(c.title)+'</h3>'+(c.text?'<p>'+esc(c.text)+'</p>':'')+(c.img?'<a href="'+esc(c.img)+'" target="_blank" rel="noopener"><img src="'+esc(c.img)+'" alt="'+esc(c.title)+'" loading="lazy" style="display:block;width:100%;height:auto;border-radius:12px;margin-top:.8rem;border:1px solid var(--line)"></a>':'')+(c.url?'<a class="btn o" target="_blank" rel="noopener" href="'+esc(c.url)+'">'+esc(c.btn||'فتح')+'</a>':'')+'</div>'}).join('')+'</div></div>';
+    var aft=p.after&&document.getElementById(p.after);if(aft){aft.parentNode.insertBefore(sec,aft.nextSibling)}else{var ref=document.getElementById('numbers');ref.parentNode.insertBefore(sec,ref)}
   });
 
   /* التبويبات (قائمة التنقل) */
