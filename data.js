@@ -66,6 +66,7 @@ window.SALAM = {
   },
 
   gallery: [
+    { file: "alwahda.jpeg", cat: "culture", title: "تخليد الذكرى الأولى لعيد الوحدة" },
     { file: "p39.jpg", cat: "culture", title: "تلاميذ بأزياء مغربية أمام المدرسة" },
     { file: "p27.jpg", cat: "culture", title: "عرض مسرحي على الركح" },
     { file: "p21.jpg", cat: "culture", title: "طفلة بزي تقليدي أمازيغي" },
@@ -105,6 +106,13 @@ window.SALAM = {
   ],
 
   events: [
+    {
+      start: "2026-10-30",
+      end: "2026-10-30",
+      title: " عقد لقاء تواصلي مع أمهات وآباء وأولياء أمور التلميذات والتلاميذ ",
+      type: "eval",
+      levels: [1, 2, 3, 4, 5, 6]
+    },
     {
       start: "2026-10-12",
       end: "2026-10-14",
